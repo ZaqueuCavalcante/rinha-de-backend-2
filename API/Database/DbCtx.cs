@@ -4,27 +4,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Database;
 
-public class DbCtx : DbContext
+public class DbCtx(DbContextOptions<DbCtx> options, DbSettings settings) : DbContext(options)
 {
-    private readonly DbSettings _settings;
-    public DbCtx(DbContextOptions<DbCtx> options, DbSettings settings) : base(options)
-    {
-        _settings = settings;
-    }
-
     public DbSet<Cliente> Clientes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_settings.ConnectionString);
+        optionsBuilder.UseNpgsql(settings.ConnectionString);
         optionsBuilder.UseSnakeCaseNamingConvention();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
-        builder.HasDefaultSchema("rinha");
 
         builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
     }

@@ -11,7 +11,7 @@ public class ClienteConfig : IEntityTypeConfiguration<Cliente>
         cliente.ToTable("clientes");
 
         cliente.HasKey(c => c.Id);
-        cliente.Property(c => c.Id).ValueGeneratedOnAdd();
+        cliente.Property(c => c.Id).UseSerialColumn();
 
         cliente.HasData(new Cliente { Id = 1, Limite = 1000_00 });
         cliente.HasData(new Cliente { Id = 2, Limite = 800_00 });

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tests;
 
@@ -19,6 +20,8 @@ public class IntegrationTestBase
         using var ctx = _factory.GetDbCtx();
         await ctx.Database.EnsureDeletedAsync();
         await ctx.Database.EnsureCreatedAsync();
+        await ctx.Database.ExecuteSqlRawAsync("ALTER TABLE clientes SET UNLOGGED;");
+        await ctx.Database.ExecuteSqlRawAsync("ALTER TABLE transacoes SET UNLOGGED;");
     }
 
     [OneTimeTearDown]
