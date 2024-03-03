@@ -1,1 +1,0 @@
-dotnet ef dbcontext script -o s.sql

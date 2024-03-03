@@ -1,10 +1,11 @@
 # Rinha de Backend - 2ª Edição
 
-https://github.com/zanfranceschi/rinha-de-backend-2024-q1
+## Zaqueu Cavalcante
+Submissão feita com:
+- `NGINX` como load balancer
+- `PostgreSQL` como banco de dados
+- `.NET 8.0 - C#` pra API
+- `NUnit` pros testes 
+- [Repositório da API](https://github.com/ZaqueuCavalcante/rinha-de-backend-2)
 
-Controle de concorrência + créditos e débitos (crébitos)
-
-https://github.com/jjeanjacques10/rinhabackend-2024-q1
-
-https://gist.github.com/zanfranceschi/76b74da7883189718841c5f48fd0ed0c
-https://github.com/leandronsp/agostinho
+[Repositório Git da Rinha de Backend - 2024/Q1](https://github.com/zanfranceschi/rinha-de-backend-2024-q1)

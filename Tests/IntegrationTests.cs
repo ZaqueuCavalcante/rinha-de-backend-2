@@ -5,7 +5,9 @@ using NUnit.Framework;
 using FluentAssertions;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using Dapper;
+using API.Domain;
 
 namespace Tests;
 
@@ -15,10 +17,10 @@ public class IntegrationTests : IntegrationTestBase
     public async Task Deve_criar_o_banco_com_os_clientes_cadastrados_corretamente()
     {
         // Arrange
-        using var ctx = _factory.GetDbCtx();
+        using var connection = new NpgsqlConnection(cnnString);
 
         // Act
-        var clientes = await ctx.Clientes.ToListAsync();
+        var clientes = (await connection.QueryAsync<Cliente>("SELECT * FROM clientes")).ToList();
 
         // Assert
         clientes.Should().HaveCount(5);
@@ -51,7 +53,7 @@ public class IntegrationTests : IntegrationTestBase
         // Arrange
         var client = _factory.CreateClient();
 
-        var body = new TransacaoIn { Tipo = 'd', Valor = 1000_01, Descricao = "Beleleibe" };
+        var body = new TransacaoIn { Tipo = "d", Valor = 1000_01, Descricao = "Beleleibe" };
 
         // Act
         var response = await client.PostAsJsonAsync("/clientes/1/transacoes", body);
@@ -66,7 +68,7 @@ public class IntegrationTests : IntegrationTestBase
         // Arrange
         var client = _factory.CreateClient();
 
-        var body = new TransacaoIn { Tipo = 'd', Valor = 1000_00, Descricao = "Beleleibe" };
+        var body = new TransacaoIn { Tipo = "d", Valor = 1000_00, Descricao = "Beleleibe" };
 
         // Act
         var response = await client.PostAsJsonAsync("/clientes/1/transacoes", body);

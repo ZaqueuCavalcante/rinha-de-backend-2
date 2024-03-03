@@ -44,7 +44,7 @@ public class ExtratoTransacaoOut
     /// <summary>
     /// c -> crédito | d -> débito
     /// </summary>
-    public char Tipo { get; set; }
+    public string Tipo { get; set; }
 
     /// <summary>
     /// Descrição informada durante a transação.
