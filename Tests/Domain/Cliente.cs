@@ -1,4 +1,4 @@
-namespace API.Domain;
+namespace Tests.Domain;
 
 public class Cliente
 {

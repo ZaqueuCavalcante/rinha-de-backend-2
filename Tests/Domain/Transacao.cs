@@ -1,6 +1,6 @@
 using System;
 
-namespace API.Domain;
+namespace Tests.Domain;
 
 public class Transacao
 {

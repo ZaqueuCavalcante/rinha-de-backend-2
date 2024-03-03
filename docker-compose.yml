@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   api01: &api
-    image: zaqueucavalcante/rinha-de-backend-2:202403031302
+    image: zaqueucavalcante/rinha-de-backend-2:202403031908
     hostname: api01
     environment:
       - ASPNETCORE_URLS=http://+:80
@@ -35,8 +35,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.15"
-          memory: "10MB"
+          cpus: "0.2"
+          memory: "40MB"
 
   db:
     image: postgres:latest

@@ -87,7 +87,7 @@ BEGIN
 			WHERE id = cliente_id_tx;
 	ELSE
 		RETURN QUERY
-			SELECT saldo, TRUE, 'saldo insuficente'::VARCHAR(20)
+			SELECT saldo, TRUE, 'not enough cash'::VARCHAR(20)
 			FROM clientes
 			WHERE id = cliente_id_tx;
 	END IF;

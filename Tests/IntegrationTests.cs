@@ -1,13 +1,13 @@
+using Npgsql;
+using Dapper;
 using API.Dtos;
 using System.Net;
 using System.Linq;
+using Tests.Domain;
 using NUnit.Framework;
 using FluentAssertions;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Npgsql;
-using Dapper;
-using API.Domain;
 
 namespace Tests;
 
