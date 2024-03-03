@@ -13,7 +13,7 @@ public class ExtratoOut
     /// <summary>
     /// Lista ordenada por data/hora das transações de forma decrescente contendo até as 10 últimas transações.
     /// </summary>
-    public List<ExtratoTransacaoOut> Ultimas { get; set; }
+    public List<ExtratoTransacaoOut> UltimasTransacoes { get; set; }
 }
 
 public class ExtratoSaldoOut
@@ -47,7 +47,7 @@ public class ExtratoTransacaoOut
     public char Tipo { get; set; }
 
     /// <summary>
-    /// String de 1 a 10 caractéres.
+    /// Descrição informada durante a transação.
     /// </summary>
     public string Descricao { get; set; }
 

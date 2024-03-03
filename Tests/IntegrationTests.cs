@@ -44,4 +44,49 @@ public class IntegrationTests : IntegrationTestBase
         // Assert
         response.Should().HaveStatusCode(HttpStatusCode.NotFound);
     }
+
+    [Test]
+    public async Task Deve_retornar_422_caso_uma_transacao_de_debito_tente_deixar_o_saldo_do_cliente_menor_que_seu_limite()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+
+        var body = new TransacaoIn { Tipo = 'd', Valor = 1000_01, Descricao = "Beleleibe" };
+
+        // Act
+        var response = await client.PostAsJsonAsync("/clientes/1/transacoes", body);
+
+        // Assert
+        response.Should().HaveStatusCode(HttpStatusCode.UnprocessableContent);
+    }
+
+    [Test]
+    public async Task Deve_retornar_200_caso_uma_transacao_de_debito_tente_deixar_o_saldo_do_cliente_igual_ao_seu_limite()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+
+        var body = new TransacaoIn { Tipo = 'd', Valor = 1000_00, Descricao = "Beleleibe" };
+
+        // Act
+        var response = await client.PostAsJsonAsync("/clientes/1/transacoes", body);
+
+        // Assert
+        response.Should().HaveStatusCode(HttpStatusCode.OK);
+    }
+
+    [Test]
+    public async Task Deve_retornar_404_caso_o_cliente_informado_na_busca_de_extrato_nao_exista()
+    {
+        // Arrange
+        var client = _factory.CreateClient();
+
+        var body = new TransacaoIn { };
+
+        // Act
+        var response = await client.GetAsync("/clientes/6/extrato");
+
+        // Assert
+        response.Should().HaveStatusCode(HttpStatusCode.NotFound);
+    }
 }
