@@ -2,29 +2,26 @@ version: "3.5"
 
 services:
   api01: &api
-    image: zaqueucavalcante/rinha-de-backend-2
+    image: zaqueucavalcante/rinha-de-backend-2:202403031302
     hostname: api01
     environment:
-      - DB_HOSTNAME=db
-      - DB_INITIAL_POOL_SIZE=13
-      - DB_MAX_POOL_SIZE=13
-      - API_USE_DB_FUNC=true
-      - PORT=3000
+      - ASPNETCORE_URLS=http://+:80
+      - DB_CONNECTION_STRING=Host=db;Username=postgres;Password=postgres;Port=5432;Database=rinha-db;Minimum Pool Size=10;Maximum Pool Size=10;Multiplexing=true;
     ports:
-      - "3001:3000"
+      - "8081:80"
     depends_on:
       - db
     deploy:
       resources:
         limits:
-          cpus: "0.55"
-          memory: "200MB"
+          cpus: "0.30"
+          memory: "50MB"
 
   api02:
     <<: *api
     hostname: api02
     ports:
-      - "3002:3000"
+      - "8082:80"
   
   nginx:
     image: nginx:latest
@@ -45,9 +42,9 @@ services:
     image: postgres:latest
     hostname: db
     environment:
-      - POSTGRES_DB=rinha
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=rinha-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     volumes:
@@ -56,8 +53,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.25"
-          memory: "140MB"
+          cpus: "0.75"
+          memory: "440MB"
 
 networks:
   default:

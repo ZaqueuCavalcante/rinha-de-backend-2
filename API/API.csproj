@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
 		<NoWarn>CS8632;</NoWarn>
+    <PublishAot>true</PublishAot>
+    <TargetFramework>net8.0</TargetFramework>
+    <OptimizationPreference>Speed</OptimizationPreference>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="8.0.2" />
